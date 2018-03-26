@@ -9,7 +9,10 @@ module.exports = {
     filename: 'build.js'
   },
   resolve: {
-    extensions: ['.js', '.json']
+    extensions: ['.js']
+  },
+  node: {
+    __dirname: true
   },
   stats: {
     colors: true,
@@ -19,7 +22,14 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
+        include: `${__dirname}/app`,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'env'],
+          plugins: [
+            'transform-object-rest-spread'
+          ]
+        }
       }  
     ]
   }
